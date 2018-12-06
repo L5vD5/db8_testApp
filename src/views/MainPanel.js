@@ -13,9 +13,9 @@ const handler = handle(
     new LS2Request().send({
       service: 'luna://com.webos.service.db/',
       method: 'putKind',
-      parameter: {
-        id: 'com.webos.service.test:1',
-        owner: 'com.webos.service.test',
+      parameters: {
+        id: 'com.domain.app2:1',
+        owner: 'com.domain.app2',
         indexes: [{name: 'sample', props: [{name: 'se'}]}]
       }
     });
