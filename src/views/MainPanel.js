@@ -14,7 +14,7 @@ const handler = handle(
       service: 'luna://com.webos.service.db/',
       method: 'putKind',
       parameters: {
-        id: 'com.domain.app2:1',
+        id: 'com.domain.app:1',
         owner: 'com.domain.app2',
         indexes: [{name: 'sample', props: [{name: 'se'}]}]
       }
