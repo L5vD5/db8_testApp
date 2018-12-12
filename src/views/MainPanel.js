@@ -141,7 +141,7 @@ export default class MainPanel extends React.Component {
   			<Button onClick={this.handler}>Test Start</Button>
         <BodyText style={{marginTop: 100}}> PUT progress : {this.state.putElapsed}ms</BodyText>
         <ProgressBar backgroundProgress={1} progress={this.state.putProgress/10000}/>
-        <BodyText> FIND progress : {this.state.putElapsed}ms</BodyText>
+        <BodyText> FIND progress : {this.state.findElapsed}ms</BodyText>
         <ProgressBar backgroundProgress={1} progress={this.state.findProgress/10000}/>
   		</Panel>
    )
