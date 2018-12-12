@@ -1,6 +1,6 @@
 import Button from '@enact/moonstone/Button';
 //import kind from '@enact/core/kind';
-//import handle from '@enact/core/handle';
+import handle from '@enact/core/handle';
 import {Panel, Header} from '@enact/moonstone/Panels';
 import LS2Request from '@enact/webos/LS2Request';
 import React from 'react';
@@ -88,7 +88,7 @@ export default class MainPanel extends React.Component {
     });
     let start = new Date().getTime();
 
-    for(let i=0; i<1000; i++) {
+    for(let i=0; i<10000; i++) {
       new LS2Request().send({
         service: 'luna://com.webos.service.db/',
         method: 'put',
@@ -101,14 +101,16 @@ export default class MainPanel extends React.Component {
           ]
         }
       });
-      this.setState({putProgress: i+1});
+      this.setState({putProgress: i});
     }
 
     let elapsed = new Date().getTime() - start;
     console.warn("l5vd5 put : " + elapsed);
+    this.setState({putElapsed: elapsed});
+
     let start2 = new Date().getTime();
 
-    for(let i=0; i<1000; i++) {
+    for(let i=0; i<10000; i++) {
       new LS2Request().send({
         service: 'luna://com.webos.service.db/',
         method: 'find',
@@ -129,6 +131,7 @@ export default class MainPanel extends React.Component {
     }
 
     let elapsed2 = new Date().getTime() - start2;
+    this.setState({findElapsed: elapsed2});
     console.warn("l5vd5 find  : " + elapsed2);
   }
 	render () {
@@ -136,10 +139,10 @@ export default class MainPanel extends React.Component {
   		<Panel>
   			<Header title="DB8 Test App" />
   			<Button onClick={this.handler}>Test Start</Button>
-        <BodyText style={{marginTop: 100}}> PUT progress </BodyText>
-        <ProgressBar backgroundProgress={1} progress={this.state.putProgress/1000}/>
-        <BodyText> FIND progress </BodyText>
-        <ProgressBar backgroundProgress={1} progress={this.state.findProgress/1000}/>
+        <BodyText style={{marginTop: 100}}> PUT progress : {this.state.putElapsed}ms</BodyText>
+        <ProgressBar backgroundProgress={1} progress={this.state.putProgress/10000}/>
+        <BodyText> FIND progress : {this.state.putElapsed}ms</BodyText>
+        <ProgressBar backgroundProgress={1} progress={this.state.findProgress/10000}/>
   		</Panel>
    )
   }
